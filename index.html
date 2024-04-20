@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1,h2{
+            text-align: center;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        #quiz{
+            display: none;
+              
+        }
+        #startquiz{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 10px;
+            width: 200px;
+            height: 50px;
+            font-size: 20px;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        #result{
+            text-align: center;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        body{
+            background-color: #AF8260;
+        }
+        #questions{
+            font-size: 18px;
+        }
+        #timer{
+            text-align: center;
+            font-weight: bold;
+        }
+        input#name, input#roll, input#email{
+            border-radius: 20px;
+            height: 30px;
+            width: 250px;
+            border: 2px solid grey;
+             
+        }
+        input:invalid{
+            background-color: red;
+        }
+        #submit{
+            border: 2px solid black;
+            margin-left: 50%;
+            border-radius: 20px;
+            height: 40px;
+            width: 100px;
+            font-size: 20px;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Police Selection Process</h1>
+    <h2>Quiz</h2>
+    <button id="startquiz" onclick="start_timer(600) ; hidebutton()">Start Quiz</button>
+    <div id="quiz">
+    <div id="timer">Time Left: 10:00</div>
+    <div id="questions">
+        <fieldset id="personal">
+            <legend>Personal Details</legend>
+            Name: <input type="name" id="name" placeholder="Enter Your Name"><br/>
+            Roll No: <input type="text" id="roll" placeholder="Enter Your Roll"><br/>
+            Email: <input type="email" id="email" placeholder="Enter Your Mail Id"><br/>
+        </fieldset>
+        <fieldset id="ques">
+            <legend>Questions</legend>
+            Q1. Calculate 20+30-40<br/>
+            <input type="radio" name="q1" value="q1a">10<br/>
+            <input type="radio" name="q1" value="q1b">20<br/>
+            <input type="radio" name="q1" value="q1c">30<br/>
+            <input type="radio" name="q1" value="q1d">40<br/>
+            Q2. Calculate 50% of 45<br/>
+            <input type="radio" name="q2" value="q2a">15<br/>
+            <input type="radio" name="q2" value="q2b">21<br/>
+            <input type="radio" name="q2" value="q2c">22.5<br/>
+            <input type="radio" name="q2" value="q2d">33.5<br/>
+            Q3. Calculate 75% of 90<br/>
+            <input type="radio" name="q3" value="q3a">68.5<br/>
+            <input type="radio" name="q3" value="q3b">67.5<br/>
+            <input type="radio" name="q3" value="q3c">69.5<br/>
+            <input type="radio" name="q3" value="q3d">70.5<br/>
+            Q4. Calculate 80% of 45<br/>
+            <input type="radio" name="q4" value="q4a">36<br/>
+            <input type="radio" name="q4" value="q4b">37<br/>
+            <input type="radio" name="q4" value="q4c">35<br/>
+            <input type="radio" name="q4" value="q4d">41<br/>
+            Q5. Calculate (90+70-40-200)/10<br/>
+            <input type="radio" name="q5" value="q5a">-9<br/>
+            <input type="radio" name="q5" value="q5b">-20<br/>
+            <input type="radio" name="q5" value="q5c">-8<br/>
+            <input type="radio" name="q5" value="q5d">40<br/>
+            Q6. Calculate 40*45<br/>
+            <input type="radio" name="q6" value="q6a">1550<br/>
+            <input type="radio" name="q6" value="q6b">1600<br/>
+            <input type="radio" name="q6" value="q6c">1700<br/>
+            <input type="radio" name="q6" value="q6d">1800<br/>
+            Q7. Calculate 27*35<br/>
+            <input type="radio" name="q7" value="q7a">945<br/>
+            <input type="radio" name="q7" value="q7b">915<br/>
+            <input type="radio" name="q7" value="q7c">875<br/>
+            <input type="radio" name="q7" value="q7d">975<br/>
+            Q8. Calculate 200% of 100<br/>
+            <input type="radio" name="q8" value="q8a">100<br/>
+            <input type="radio" name="q8" value="q8b">200<br/>
+            <input type="radio" name="q8" value="q8c">300<br/>
+            <input type="radio" name="q8" value="q8d">400<br/>
+            Q9. Calculate 1665/15<br/>
+            <input type="radio" name="q9" value="q9a">110<br/>
+            <input type="radio" name="q9" value="q9b">112<br/>
+            <input type="radio" name="q9" value="q9c">111<br/>
+            <input type="radio" name="q9" value="q9d">109<br/>
+            Q10. Calculate 14*14<br/>
+            <input type="radio" name="q10" value="q10a">276<br/>
+            <input type="radio" name="q10" value="q10b">234<br/>
+            <input type="radio" name="q10" value="q10c">206<br/>
+            <input type="radio" name="q10" value="q10d">196<br/>
+        </fieldset>
+    </div>
+    <button id="submit" type="submit" onclick="check()">Submit</button>
+    </div>
+    <div id="result">
+
+    </div>
+    <script>
+        function start_timer(x){
+            var timeleft= x;
+            var disp= document.getElementById("timer");
+            var timeinterval= setInterval(function(){
+                var minutes= Math.floor(timeleft/60);
+                var seconds= Math.floor(timeleft%60);
+                var formatted_minutes= (minutes<10)?"0"+minutes:minutes;
+                var formatted_seconds= (seconds<10)?"0"+seconds:seconds;
+                disp.textContent= "Time Left: "+formatted_minutes+":"+formatted_seconds;
+                timeleft--;
+                if (timeleft==-2){
+                clearInterval(timeinterval);
+                disp.textContent= "00:00";
+                document.getElementById("submit").style.display="none";
+                alert("Time is up!!");    
+            }
+            },1000);
+            
+        }
+        function hidebutton(){
+            document.body.style.backgroundColor="#E4C59E";
+            document.getElementById("startquiz").style.display="none";
+            document.getElementById("quiz").style.display="block";
+        }
+        function check(){
+            var answers= ["q1a","q2c","q3b","q4a","q5c","q6d","q7a","q8b","q9c","q10d"];
+            var score=0;
+            for (let i=1;i<=10;i++){
+                var options= document.getElementsByName("q"+i);
+                for (let j=0;j<4;j++){
+                    if(options[j].checked){
+                        if(options[j].value==answers[i-1]){
+                            score++;
+                        }
+                        break;
+                    }
+                }
+            }
+            var today=new Date();
+            var tomorrow= new Date(today);
+            tomorrow.setDate(today.getDate()+1);
+            
+            document.getElementById("quiz").style.display="none";
+            if (score>7){
+                document.getElementById("result").textContent="Congratulations!! Your Grade is: "+score+"/10 Interview Date: "+tomorrow.getDate()+"/"+(parseInt(tomorrow.getMonth())+1)+"/"+tomorrow.getFullYear()+" Time: 4:00pm IST";
+            }
+            else{
+                document.getElementById("result").textContent="Your Grade is: "+score+"/10";
+            }
+            
+        }
+    </script>
+</body>
+</html>
